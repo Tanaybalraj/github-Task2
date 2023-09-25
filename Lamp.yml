@@ -29,15 +29,6 @@
         state: started
         enabled: yes
 
-    - name: create target directory
-      file: path=/var/www/html state=directory mode=0755
-
-    - name: deploy index.html
-      become: yes
-      become_user: root
-      copy:
-        src: index.html
-        dest: /var/www/html/index.html
-
+   
 
     
