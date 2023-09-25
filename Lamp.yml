@@ -1,5 +1,5 @@
 ---
-- hosts: 172.31.12.66
+- hosts: 172.31.42.247
   tasks:
     - name: install lamp stack
       become: yes
