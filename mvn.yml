@@ -1,7 +1,6 @@
 ---
 - name: Install Apache Maven on AWS EC2
-  hosts: localhost
-  connection: local
+  hosts: 172.31.44.63
   become: yes
   tasks:
     - name: Ensure Java is installed
