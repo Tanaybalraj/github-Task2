@@ -1,0 +1,39 @@
+---
+- name: Install Apache Maven on AWS EC2
+  hosts: localhost
+  connection: local
+  become: yes
+  tasks:
+    - name: Ensure Java is installed
+      become: yes
+      package:
+        name: java-11-amazon-corretto
+        state: present
+
+    - name: Download Apache Maven
+      become: yes
+      get_url:
+        url: "https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz"
+        dest: /opt/apache-maven-3.9.4-bin.tar.gz
+        mode: 0644
+
+    - name: Extract Apache Maven
+      become: yes
+      unarchive:
+        src: /opt/apache-maven-3.9.4-bin.tar.gz
+        dest: /opt
+        remote_src: yes
+      notify: Set Maven Environment Variables
+
+    - name: Set Maven Environment Variables
+      copy:
+          content: |
+            export MAVEN_HOME=/opt/apache-maven-3.9.4
+            export PATH=$PATH:$MAVEN_HOME/bin
+          dest: /root/.bash_profile
+      when: not ansible_check_mode
+
+    - name: Reload Bash Profile
+      shell: source ~/.bash_profile
+      args:
+        executable: /bin/bash
