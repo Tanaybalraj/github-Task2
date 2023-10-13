@@ -5,13 +5,13 @@
   tasks:
     - name: Pull Docker Image
       docker_image:
-        name: tanaybalraj/task:tomcat-task
+        name: tanaybalraj/task:Jenkins-Tomcat
         state: present
 
     - name: Run Docker Container
       docker_container:
         name: my_container
-        image: tanaybalraj/task:tomcat-task
+        image: tanaybalraj/task:Jenkins-Tomcat
         state: started
         ports:
           - "1000:8080"  # Map port 80 in the container to port 8080 on the host
