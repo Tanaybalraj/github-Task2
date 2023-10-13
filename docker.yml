@@ -3,7 +3,6 @@
   hosts: localhost
   connection: local  # You can change the host as needed
   become: yes
-  become_user: root
   tasks:
     - name: Pull Docker Image
       docker_image:
