@@ -1,6 +1,7 @@
 ---
 - name: Pull and Containerize Docker Image
   hosts: localhost  # You can change the host as needed
+  connection: local
   become: yes
   tasks:
     - name: Pull Docker Image
